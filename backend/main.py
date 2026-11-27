@@ -116,3 +116,8 @@ def seed_initial_data():
         db.rollback()
     finally:
         db.close()
+
+
+# Also ensure initial data is seeded when imported in serverless environments (e.g., Vercel)
+if os.getenv("VERCEL"):
+    seed_initial_data()
