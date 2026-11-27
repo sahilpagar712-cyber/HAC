@@ -7,7 +7,8 @@ from dotenv import load_dotenv
 
 load_dotenv(os.path.join(os.path.dirname(__file__), ".env"))
 
-DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./redactzero.db")
+_default_db = "sqlite:////tmp/redactzero.db" if os.getenv("VERCEL") else "sqlite:///./redactzero.db"
+DATABASE_URL = os.getenv("DATABASE_URL", _default_db)
 
 engine = create_engine(
     DATABASE_URL,
